@@ -1,0 +1,9 @@
+﻿@model IEnumerable<HotelMNG.Models.Menu>
+@foreach(var item in Model.Where(i=>i.Levels == 1))
+{
+    <li class="active">
+        <a href="./@item.Alias">
+            @item.Title
+        </a>
+    </li>
+}
