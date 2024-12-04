@@ -1,32 +1,50 @@
 using HotelMNG.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 
-namespace HotelMNG.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ILogger<HomeController> _logger;
+    private readonly Qlks3Context _context;
+
+    public HomeController(ILogger<HomeController> logger, Qlks3Context context)
     {
-        private readonly ILogger<HomeController> _logger;
+        _logger = logger;
+        _context = context;
+    }
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    public IActionResult Index()
+    {
+        return View();
+    }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+    public IActionResult Rooms()
+    {
+        var rooms = _context.Rooms.ToList();
+        return View(rooms);
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    public IActionResult AboutUs()
+    {
+        return View();
+    }
+
+    public IActionResult Blog()
+    {
+        var blogPosts = _context.BlogPosts.ToList();
+        return View(blogPosts);
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

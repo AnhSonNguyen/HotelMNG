@@ -3,7 +3,7 @@
 @foreach (var item in Model.Where(i => i.Levels == 1))
 {
     <li class="active">
-        <a href="~/@item.Alias">
+        <a href="@(item.Alias == "index" ? Url.Action("Index", "Home") : Url.Action(item.Alias, "Home"))">
             @item.Title
         </a>
     </li>

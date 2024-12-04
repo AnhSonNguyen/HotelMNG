@@ -2,7 +2,7 @@ using HotelMNG.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<Qlks3Context>(options=>
+builder.Services.AddDbContext<Qlks3Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -29,6 +29,11 @@ app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
 );
+
+app.MapControllerRoute(
+    name: "rooms",
+    pattern: "Rooms",
+    defaults: new { controller = "Home", action = "Rooms" });
 
 app.MapControllerRoute(
     name: "default",
