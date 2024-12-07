@@ -1,5 +1,21 @@
-﻿@model IEnumerable<HotelMNG.Models.BlogPost>
-
+﻿<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-text">
+                    <h2>Blog</h2>
+                    <div class="bt-option">
+                        <a href="./home.html">Home</a>
+                        <span>Blog Grid</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb Section End -->
+<!-- Blog Section Begin -->
 <section class="blog-section blog-page spad">
     <div class="container">
         <div class="row">
@@ -11,16 +27,11 @@
                             <span class="b-tag">@item.Category</span>
                             <h4><a href="/@item.Alias">@item.Title</a></h4>
                             <div class="b-time"><i class="icon_clock_alt"></i> @item.CreatedAt.ToString("dd MMMM, yyyy")</div>
-                            <p>@item.Content</p>
                         </div>
                     </div>
                 </div>
             }
-            <div class="col-lg-12">
-                <div class="load-more">
-                    <a href="#" class="primary-btn">Load More</a>
-                </div>
-            </div>
         </div>
     </div>
 </section>
+<!-- Blog Section End -->
