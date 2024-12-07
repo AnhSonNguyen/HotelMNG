@@ -1,5 +1,7 @@
 ﻿using HotelMNG.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HotelMNG.ViewComponents
 {
@@ -12,10 +14,9 @@ namespace HotelMNG.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var items = _context.Menus.Where(m => (bool)m.IsActive).
-                OrderBy(m => m.Position).ToList();
+            var items = _context.Menus.Where(m => m.IsActive)
+                .OrderBy(m => m.Position).ToList();
             return await Task.FromResult<IViewComponentResult>(View(items));
         }
     }
 }
-

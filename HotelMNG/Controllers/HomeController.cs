@@ -39,7 +39,7 @@ public class HomeController : Controller
     public IActionResult Blog()
     {
         var blogPosts = _context.BlogPosts.ToList();
-        return View(blogPosts);
+        return View("Blog", blogPosts);
     }
 
     public IActionResult Contact()
