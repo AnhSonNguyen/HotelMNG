@@ -16,4 +16,14 @@ public class BlogController : Controller
         var blogPosts = _context.BlogPosts.ToList();
         return View(blogPosts); // Trỏ đến view Blog.cshtml
     }
+
+    public IActionResult BlogDetail(string alias)
+    {
+        var blogPost = _context.BlogPosts.FirstOrDefault(b => b.Alias == alias);
+        if (blogPost == null)
+        {
+            return NotFound();
+        }
+        return View(blogPost); // Trỏ đến view BlogDetail.cshtml
+    }
 }

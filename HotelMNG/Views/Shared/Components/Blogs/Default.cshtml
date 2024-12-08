@@ -7,7 +7,7 @@
             <div class="blog-item set-bg" data-setbg="@item.Image" style="background-image: url('@item.Image');">
                 <div class="bi-text">
                     <span class="b-tag">@item.Category</span>
-                    <h4><a href="/@item.Alias">@item.Title</a></h4>
+                    <h4><a href="@Url.Action("BlogDetail", "Blog", new { alias = item.Alias })">@item.Title</a></h4>
                     <div class="b-time"><i class="icon_clock_alt"></i> @item.CreatedAt.ToString("dd MMMM, yyyy")</div>
                     <p class="white-text">@item.Content</p>
                 </div>
