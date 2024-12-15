@@ -8,7 +8,7 @@
                 <div class="bi-text">
                     <span class="b-tag">@item.Category</span>
                     <h4><a href="@Url.Action("BlogDetail", "Blog", new { alias = item.Alias })">@item.Title</a></h4>
-                    <div class="b-time"><i class="icon_clock_alt"></i> @item.CreatedAt.ToString("dd MMMM, yyyy")</div>
+                    <div class="b-time"><i class="icon_clock_alt"></i> @item.CreatedAt</div>
                     <p class="white-text">@item.Content</p>
                 </div>
             </div>
