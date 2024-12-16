@@ -53,9 +53,14 @@ app.MapControllerRoute(
     name: "blogs",
     pattern: "blogs",
     defaults: new { controller = "Blog", action = "Index" });
+
 app.MapControllerRoute(
     name: "blog-detail",
     pattern: "{alias}",
     defaults: new { controller = "Blog", action = "BlogDetail" });
+
+app.MapControllerRoute(
+    name: "admin",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
