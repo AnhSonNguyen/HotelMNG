@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HotelMNG.Models.Room>
+﻿@model IEnumerable<HotelMNG.Models.ActualRoom>
 
 @{
     ViewData["Title"] = "Index";
@@ -11,7 +11,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý loại phòng</h1>
+                    <h1>Quản lý phòng</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -48,13 +48,10 @@
                                 <thead>
                                     <tr>
                                         <th>STT</th>
-                                        <th>Tên phòng</th>
-                                        <th>Giá</th>
-                                        <th>Kích thước</th>
-                                        <th>Sức chứa</th>
-                                        <th>Loại giường</th>
-                                        <th>Hình ảnh</th>
+                                        <th>Số phòng</th>
+                                        <th>Loại phòng</th>
                                         <th>Trạng thái</th>
+                                        <th>Ghi chú</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -68,30 +65,21 @@
                                         <tr>
                                             <td>@stt</td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Name)
+                                                @Html.DisplayFor(modelItem => item.RoomNumber)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Price)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Size)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Capacity)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.Bed)
-                                            </td>
-                                            <td>
-                                                <img src="@item.Image" alt="Room Image" style="width: 100px; height: auto;" />
+                                                @Html.DisplayFor(modelItem => item.RoomType)
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.Status)
                                             </td>
                                             <td>
-                                                <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.RoomId">Sửa</a> |
-                                                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.RoomId">Chi tiết</a> |
-                                                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.RoomId">Xóa</a>
+                                                @Html.DisplayFor(modelItem => item.Notes)
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-outline-info" asp-action="Edit" asp-route-id="@item.ActualRoomId">Sửa</a> |
+                                                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.ActualRoomId">Chi tiết</a> |
+                                                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.ActualRoomId">Xóa</a>
                                             </td>
                                         </tr>
                                     }

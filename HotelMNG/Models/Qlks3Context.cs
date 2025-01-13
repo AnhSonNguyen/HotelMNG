@@ -17,6 +17,8 @@ public partial class Qlks3Context : DbContext
 
     public virtual DbSet<Amenity> Amenities { get; set; }
 
+    public virtual DbSet<ActualRoom> ActualRooms { get; set; }
+
     public virtual DbSet<BlogPost> BlogPosts { get; set; }
 
     public virtual DbSet<Booking> Bookings { get; set; }
@@ -35,7 +37,6 @@ public partial class Qlks3Context : DbContext
 
     public virtual DbSet<RoomAmenity> RoomAmenities { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -82,22 +83,42 @@ public partial class Qlks3Context : DbContext
                 .HasConstraintName("FK__BlogPosts__Categ__59C55456");
         });
 
+        modelBuilder.Entity<ActualRoom>(entity =>
+        {
+            entity.HasKey(e => e.ActualRoomId).HasName("PK__ActualRooms__1BC821DD");
+
+            entity.Property(e => e.ActualRoomId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("ActualRoomID");
+            entity.Property(e => e.RoomNumber)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.RoomType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Notes)
+                .HasMaxLength(255)
+                .IsUnicode(false);
+        });
+
         modelBuilder.Entity<Booking>(entity =>
         {
             entity.HasKey(e => e.BookingId).HasName("PK__Bookings__73951ACDC722E415");
 
             entity.Property(e => e.BookingId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("BookingID");
-            entity.Property(e => e.RoomId).HasColumnName("RoomID");
-            entity.Property(e => e.Status)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.RoomType).HasColumnName("RoomType");
+            entity.Property(e => e.ActualRoomId).HasColumnName("ActualRoomID");
+            entity.Property(e => e.CheckInDate).HasColumnType("datetime");
+            entity.Property(e => e.CheckOutDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Bookings)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Bookings__UserID__1BC821DD");
+            entity.HasOne(d => d.ActualRoom).WithMany(p => p.Bookings)
+                .HasForeignKey(d => d.ActualRoomId)
+                .HasConstraintName("FK__Bookings__ActualRoomID__1BC821DD");
         });
 
         modelBuilder.Entity<Category>(entity =>
@@ -165,28 +186,6 @@ public partial class Qlks3Context : DbContext
             entity.Property(e => e.Title).HasMaxLength(150);
         });
 
-        modelBuilder.Entity<Review>(entity =>
-        {
-            entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79AE2D24F9E2");
-
-            entity.Property(e => e.ReviewId)
-                .ValueGeneratedNever()
-                .HasColumnName("ReviewID");
-            entity.Property(e => e.Comment).HasColumnType("text");
-            entity.Property(e => e.CreatedAt)
-                .IsRowVersion()
-                .IsConcurrencyToken();
-            entity.Property(e => e.EntityId).HasColumnName("EntityID");
-            entity.Property(e => e.EntityType)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.UserId).HasColumnName("UserID");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Reviews__UserID__1EA48E88");
-        });
-
         modelBuilder.Entity<Room>(entity =>
         {
             entity.HasKey(e => e.RoomId).HasName("PK__Rooms__328639199920A269");
@@ -229,24 +228,6 @@ public partial class Qlks3Context : DbContext
             entity.HasOne(d => d.Room).WithMany(p => p.RoomAmenities)
                 .HasForeignKey(d => d.RoomId)
                 .HasConstraintName("FK__RoomAmeni__RoomI__25518C17");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC4E271ABA");
-
-            entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
-                .HasColumnName("UserID");
-            entity.Property(e => e.Password)
-                .HasMaxLength(255)
-                .IsUnicode(false);
-            entity.Property(e => e.Role)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Username)
-                .HasMaxLength(255)
-                .IsUnicode(false);
         });
 
         OnModelCreatingPartial(modelBuilder);

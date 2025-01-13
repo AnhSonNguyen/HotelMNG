@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HotelMNG.Models;
-
-public partial class Booking
+namespace HotelMNG.Models
 {
-    public int BookingId { get; set; }
+    public partial class Booking
+    {
+        public int BookingId { get; set; }
 
-    public int? RoomId { get; set; }
+        public int? ActualRoomId { get; set; }
 
-    public int? UserId { get; set; }
+        public DateTime? CheckInDate { get; set; }
 
-    public DateOnly? CheckInDate { get; set; }
+        public DateTime? CheckOutDate { get; set; }
 
-    public DateOnly? CheckOutDate { get; set; }
+        public string RoomType { get; set; }
 
-    public string? Status { get; set; }
-
-    public virtual User? User { get; set; }
+        public virtual ActualRoom ActualRoom { get; set; }
+    }
 }

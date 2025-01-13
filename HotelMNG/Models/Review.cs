@@ -18,6 +18,4 @@ public partial class Review
     public string? Comment { get; set; }
 
     public byte[] CreatedAt { get; set; } = null!;
-
-    public virtual User? User { get; set; }
 }

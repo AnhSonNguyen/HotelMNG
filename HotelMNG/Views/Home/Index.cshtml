@@ -15,33 +15,29 @@
             <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                 <div class="booking-form">
                     <h3>Booking Your Hotel</h3>
-                    <form action="#">
+                    <form id="booking-form">
                         <div class="check-date">
                             <label for="date-in">Check In:</label>
-                            <input type="text" class="date-input" id="date-in">
+                            <input type="text" class="date-input" id="date-in" name="CheckInDate">
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="check-date">
                             <label for="date-out">Check Out:</label>
-                            <input type="text" class="date-input" id="date-out">
+                            <input type="text" class="date-input" id="date-out" name="CheckOutDate">
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="select-option">
-                            <label for="guest">Guests:</label>
-                            <select id="guest">
-                                <option value="">2 Adults</option>
-                                <option value="">3 Adults</option>
-                            </select>
-                        </div>
-                        <div class="select-option">
                             <label for="room">Room:</label>
-                            <select id="room">
-                                <option value="">1 Room</option>
-                                <option value="">2 Room</option>
+                            <select id="room" name="Room">
+                                <option value="Standard Room">Standard Room</option>
+                                <option value="Double Room">Double Room</option>
+                                <option value="VIP">VIP</option>
+                                <option value="Family Room">Family Room</option>
                             </select>
                         </div>
                         <button type="submit">Check Availability</button>
                     </form>
+                    <div id="message"></div>
                 </div>
             </div>
         </div>
@@ -52,6 +48,49 @@
         <div class="hs-item set-bg" data-setbg="/assets/img/hero/hero-3.jpg"></div>
     </div>
 </section>
+<!-- Hero Section End -->
+<!-- Thêm đoạn mã JavaScript vào đây -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#booking-form').on('submit', function(event) {
+            event.preventDefault();
+
+            // Kiểm tra xem tất cả các trường đã được điền đầy đủ
+            var checkInDate = $('#date-in').val();
+            var checkOutDate = $('#date-out').val();
+            var room = $('#room').val();
+
+            if (!checkInDate || !checkOutDate || !room) {
+                $('#message').html('<div class="alert alert-danger">Please fill in all the required fields.</div>');
+                return;
+            }
+
+            $.ajax({
+                url: '/Booking/SubmitBooking',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        $('#message').html('<div class="alert alert-success">Booking successful! Your room is available.</div>');
+                        // Xóa thông tin trong form sau khi đặt phòng thành công
+                        $('#booking-form')[0].reset();
+                    } else {
+                        $('#message').html('<div class="alert alert-danger">' + response.message + '</div>');
+                        // Xóa thông tin trong form sau khi đặt phòng thất bại
+                        $('#booking-form')[0].reset();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#message').html('<div class="alert alert-danger">Booking failed. Please try again.</div>');
+                    // Xóa thông tin trong form sau khi đặt phòng thất bại
+                    $('#booking-form')[0].reset();
+                }
+            });
+        });
+    });
+</script>
+
 <!-- Hero Section End -->
 <!-- About Us Section Begin -->
 <section class="aboutus-section spad">

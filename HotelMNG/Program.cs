@@ -73,4 +73,28 @@ app.MapControllerRoute(
     name: "admin",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "admin_actualrooms",
+    pattern: "Admin/ActualRooms",
+    defaults: new { area = "Admin", controller = "ActualRooms", action = "Index" }
+);
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+);
+
+app.MapControllerRoute(
+    name: "admin_blogs",
+    pattern: "Admin/Blogs",
+    defaults: new { area = "Admin", controller = "Blogs", action = "Index" }
+);
+
+
+
 app.Run();
