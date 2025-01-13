@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Blog Post Details</h1>
+                    <h1>Chi tiết bài viết</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blog Post Details</li>
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Chi tiết bài viết</li>
                     </ol>
                 </div>
             </div>
@@ -31,11 +31,11 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Blog Post Details</h3>
+                            <h3 class="card-title">Chi tiết bài viết</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail">Title:</label>
+                                <label for="exampleInputEmail">Tiêu đề:</label>
                                 @Html.DisplayFor(model => model.Title)
                             </div>
                             <div class="form-group">
@@ -43,24 +43,24 @@
                                 @Html.DisplayFor(model => model.Alias)
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail">Image:</label>
+                                <label for="exampleInputEmail">Hình ảnh:</label>
                                 <img src="@Model.Image" alt="Blog Image" style="width: 100px; height: auto;" />
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail">Created At:</label>
+                                <label for="exampleInputEmail">Ngày tạo:</label>
                                 @Html.DisplayFor(model => model.CreatedAt)
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail">Category:</label>
+                                <label for="exampleInputEmail">Danh mục:</label>
                                 @Html.DisplayFor(model => model.Category)
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail">Content:</label>
+                                <label for="exampleInputEmail">Nội dung:</label>
                                 @Html.DisplayFor(model => model.Content)
                             </div>
                             <div class="card-footer">
-                                <a asp-action="Edit" asp-route-id="@Model.BlogPostId" class="btn btn-primary">Edit</a>
-                                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                                <a asp-action="Edit" asp-route-id="@Model.BlogPostId" class="btn btn-primary">Sửa</a>
+                                <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
                             </div>
                         </div>
                         <!-- /.card -->
